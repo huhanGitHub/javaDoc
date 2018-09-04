@@ -2,23 +2,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
-
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         try {
-        ArrayList<File> java_files=getFiles("C:\\Users\\Administrator\\Desktop\\paper\\src");
+        ArrayList<File> java_files=getFiles("C:\\Users\\Administrator\\Desktop\\paper\\classes\\Bll\\train-pro\\zxing-master\\zxing-master");
         for (File file:java_files){
-            if (file.renameTo(new File("C:\\Users\\Administrator\\Desktop\\paper\\classes\\All\\"+file.getName()))){
+            if (file.renameTo(new File("C:\\Users\\Administrator\\Desktop\\paper\\classes\\Bll\\train-pro\\zxing-master\\java\\"+file.getName()))){
                 System.out.println(file.getName()+" moved success");
             }else {
                 System.out.println(file.getName()+" moved fail");
             }
-
         }
             } catch (Exception e1) {
             e1.printStackTrace();
         }
-
     }
 
     public static ArrayList<File> getFiles(String path) throws Exception{
@@ -30,7 +26,10 @@ public class Main {
                 if (fileIndex.isDirectory()){
                     fileList.addAll(getFiles(fileIndex.getPath()));
                 }else {
-                    fileList.add(fileIndex);
+                    String name=fileIndex.getName();
+                    if (name.substring(name.lastIndexOf(".")+1).equals("java")){
+                        fileList.add(fileIndex);
+                    }
                 }
             }
         }
